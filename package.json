@@ -1,0 +1,21 @@
+{
+	"name": "lounge-bot",
+	"version": "0.0.0",
+	"description": "This is the bot for Igor's Coding Lounge",
+	"main": "index.js",
+	"scripts": {
+		"start": "node index.js",
+		"test": "nodemon index.js"
+	},
+	"keywords": [
+		"discord",
+		"bot",
+		"igors-lounge"
+	],
+	"author": "PaperKing01",
+	"license": "MIT",
+	"dependencies": {
+		"@discordjs/opus": "^0.1.0",
+		"discord.js": "^12.0.1"
+	}
+}
