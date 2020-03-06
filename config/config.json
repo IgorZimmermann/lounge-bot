@@ -1,0 +1,16 @@
+{
+	"statuses": [
+		{
+			"name": "TikTok",
+			"type": "WATCHING"
+		},
+		{
+			"name": "Netflix",
+			"type": "WATCHING"
+		},
+		{
+			"name": "Hacknet",
+			"type": "PLAYING"
+		}
+	]
+}

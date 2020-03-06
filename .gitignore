@@ -1,4 +1,6 @@
-config/
-database/*.json
-package-lock.json
+# Secrets ignore
+*/sercrets.json
+
+# NPM ignores
 node_modules/
+package-lock.json
