@@ -1,6 +1,7 @@
 const discord = require('discord.js');
 const fs = require('fs');
 
+const config = require('./config/config.json');
 const secret = require('./config/sercrets.json');
 
 let bot = new discord.Client();
@@ -20,6 +21,11 @@ fs.readdir('./commands/', (err, files) => {
 });
 
 bot.on('ready', () => {
+	setInterval(() => {
+		let status =
+			config.statuses[Math.floor(Math.random() * config.statuses.length)];
+		bot.user.setActivity(status);
+	}, 3000);
 	console.log(`${bot.user.username} is online...`);
 });
 
