@@ -46,7 +46,7 @@ bot.on('message', async message => {
 			cmdfile.run(bot, message, args);
 		} else {
 			message.channel.send(
-				"I don't have such command. Use the help command `.help` for all the commands."
+				'I do not have such command. Use `.help` to see all commands!'
 			);
 		}
 	}
