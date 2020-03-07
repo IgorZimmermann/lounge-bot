@@ -1,5 +1,5 @@
 # Secrets ignore
-*/sercrets.json
+*/secrets.json
 
 # NPM ignores
 node_modules/
