@@ -19,8 +19,8 @@ module.exports.run = async (bot, message, args) => {
 			.addField('Banned by', message.author)
 			.addField('Banned at', message.createdAt)
 			.addField('Reason', reason);
-		bot.channels.fetch('685944369500782625').then(t => {
-			t.send(reportEmbed);
+		bot.channels.fetch('685944369500782625').then(c => {
+			c.send(reportEmbed);
 		});
 	});
 	message.delete();
