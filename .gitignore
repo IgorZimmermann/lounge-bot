@@ -1,6 +1,10 @@
 # Secrets ignore
 */secrets.json
 
+# Test ignore
+test/
+*.test.js
+
 # NPM ignores
 node_modules/
 package-lock.json
