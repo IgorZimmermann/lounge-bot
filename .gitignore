@@ -4,6 +4,10 @@
 # Polls ignore
 utils/polls.json
 
+# Test ignore
+test/
+*.test.js
+
 # NPM ignores
 node_modules/
 package-lock.json
