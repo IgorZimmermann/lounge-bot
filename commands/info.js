@@ -5,9 +5,7 @@ module.exports.run = async (bot, message, args) => {
 		.setTitle('Server Info')
 		.setDescription('Info about the server')
 		.setColor('#4FB1BB')
-		.setImage(
-			'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftheultralinx.com%2F.image%2Ft_share%2FMTI5ODI1NzA5NDc1NTA2ODE5%2Fvintage-3d-gif-2gif.gif&f=1&nofb=1'
-		)
+		.setThumbnail(message.guild.iconURL())
 		.addField('Server Name', `${message.guild.name}`)
 		.addField('Server Created At', `${message.guild.createdAt}`)
 		.addField('Server Owner', `${message.guild.owner}`)
