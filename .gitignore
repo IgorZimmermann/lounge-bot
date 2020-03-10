@@ -1,6 +1,9 @@
 # Secrets ignore
 */secrets.json
 
+# Polls ignore
+utils/polls.json
+
 # NPM ignores
 node_modules/
 package-lock.json
