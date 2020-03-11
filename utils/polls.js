@@ -28,6 +28,9 @@ module.exports = {
 		delete require.cache[require.resolve(pollLoc)];
 		pollFile = require(pollLoc);
 	},
+	getPoll: name => {
+		return pollFile.find(x => x.name === name);
+	},
 	changeVote: (name, option, value) => {
 		if (!name || !option || !value)
 			return console.log(new Error('Missing crucial argument'));
