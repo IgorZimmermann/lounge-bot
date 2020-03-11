@@ -9,6 +9,8 @@ let bot = new discord.Client();
 bot.commands = new discord.Collection();
 bot.aliases = new discord.Collection();
 
+bot.polls = require('./utils/polls');
+
 fs.readdir('./commands/', (err, files) => {
 	let jsfiles = files.filter(f => f.split('.').pop() === 'js');
 	jsfiles.forEach((f, i) => {
