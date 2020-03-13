@@ -46,6 +46,13 @@ module.exports = {
 		delete require.cache[require.resolve(pollLoc)];
 		pollFile = require(pollLoc);
 	},
+	getAllOptionNames: name => {
+		let names = [];
+		pollFile
+			.find(x => x.name === name)
+			.options.forEach(o => names.push(o.name));
+		return names;
+	},
 	getVotes: (name, option) => {
 		return pollFile
 			.find(x => x.name === name)
