@@ -31,6 +31,9 @@ module.exports = {
 	getPoll: name => {
 		return pollFile.find(x => x.name === name);
 	},
+	getAllPolls: () => {
+		return pollFile;
+	},
 	changeVote: (name, option, value) => {
 		if (!name || !option || !value)
 			return console.log(new Error('Missing crucial argument'));
