@@ -2,7 +2,6 @@ const discord = require('discord.js');
 const fs = require('fs');
 
 const config = require('./config/config.json');
-const secret = require('./config/secrets.json');
 
 let bot = new discord.Client();
 
