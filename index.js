@@ -54,4 +54,4 @@ bot.on('message', async message => {
 	}
 });
 
-bot.login(secret.auth.token);
+bot.login(process.env.DISCORD_TOKEN);
