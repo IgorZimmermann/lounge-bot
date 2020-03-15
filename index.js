@@ -8,7 +8,18 @@ let bot = new discord.Client();
 bot.commands = new discord.Collection();
 bot.aliases = new discord.Collection();
 
-bot.polls = require('./utils/polls');
+const mongoose = require('mongoose');
+
+mongoose.connect(
+	`mongodb+srv://PaperKing01:${process.env.MONGO_PASSWORD}@cluster0-htwth.mongodb.net/test?retryWrites=true&w=majority`,
+	{
+		useNewUrlParser: true,
+		useUnifiedTopology: true
+	},
+	err => {
+		if (err) return console.error(err);
+	}
+);
 
 fs.readdir('./commands/', (err, files) => {
 	let jsfiles = files.filter(f => f.split('.').pop() === 'js');
@@ -28,6 +39,8 @@ bot.on('ready', () => {
 		bot.user.setActivity(status);
 	}, 3000);
 	console.log(`${bot.user.username} is online...`);
+	if (mongoose.connection)
+		console.log(`${bot.user.username} connected to the database...`);
 });
 
 bot.on('message', async message => {
