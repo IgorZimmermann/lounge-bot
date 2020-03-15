@@ -17,7 +17,8 @@
 	"license": "MIT",
 	"dependencies": {
 		"@discordjs/opus": "^0.1.0",
-		"discord.js": "^12.0.1"
+		"discord.js": "^12.0.1",
+		"mongoose": "^5.9.4"
 	},
 	"devDependencies": {
 		"inquirer": "^7.0.6"
