@@ -8,8 +8,13 @@ let pollSchema = new Schema({
 	choices: [{ title: String, votes: Number }]
 });
 
-pollSchema.methods.findByTitle = (title, cb) => {
-	return this.find({ title: title }, cb);
+pollSchema.methods.getOrder = () => {
+	return this.choices.sort((a, b) => {
+		return b.votes - a.votes;
+	});
 };
 
-module.exports = pollSchema;
+pollSchema.statics.findByTitle = (title, cb) => {
+	return this.model.find({ title: title }, cb);
+};
+module.exports = mongoose.model('Poll', pollSchema);
