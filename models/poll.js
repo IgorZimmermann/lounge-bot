@@ -12,4 +12,4 @@ pollSchema.methods.findByTitle = (title, cb) => {
 	return this.find({ title: title }, cb);
 };
 
-module.exports = mongoose.model('Poll', pollSchema);
+module.exports = pollSchema;
