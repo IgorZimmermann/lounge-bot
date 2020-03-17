@@ -66,26 +66,31 @@ module.exports.run = async (bot, message, args) => {
 
 				const options = { time: 20000, max: 1, errors: ['time'] };
 				message.channel.send(pollsEmbed).then(() => {
-					message.channel.awaitMessages(filter, options).then(m => {
-						if (/cancel/i.test(m.first().content))
-							return message.channel.send(`${message.author}: Cancelled`);
-						Poll.findOne({ title: m.first().content }, (err, poll) => {
-							if (!poll)
-								return message.channel.send(
-									`${message.author}: No poll found.`
-								);
-							let pollEmbed = new discord.MessageEmbed()
-								.setAuthor(bot.user.username)
-								.setColor('#50B3BC')
-								.setTitle(poll.title);
+					message.channel
+						.awaitMessages(filter, options)
+						.then(m => {
+							if (/cancel/i.test(m.first().content))
+								return message.channel.send(`${message.author}: Cancelled`);
+							Poll.findOne({ title: m.first().content }, (err, poll) => {
+								if (!poll)
+									return message.channel.send(
+										`${message.author}: No poll found.`
+									);
+								let pollEmbed = new discord.MessageEmbed()
+									.setAuthor(bot.user.username)
+									.setColor('#50B3BC')
+									.setTitle(poll.title);
 
-							poll.choices.forEach(p => {
-								pollEmbed.addField(p.title, p.votes);
+								poll.choices.forEach(p => {
+									pollEmbed.addField(p.title, p.votes);
+								});
+
+								message.channel.send(pollEmbed);
 							});
-
-							message.channel.send(pollEmbed);
-						});
-					});
+						})
+						.catch(() =>
+							message.channel.send(`${message.author}: Ran out of time.`)
+						);
 				});
 			});
 		} else {
