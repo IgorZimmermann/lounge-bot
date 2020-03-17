@@ -9,6 +9,10 @@ module.exports.run = async (bot, message, args) => {
 				return message.channel.send(
 					`${message.author}: No poll found with that name.`
 				);
+			if (poll.voters.includes(message.author.id))
+				return message.channel.send(
+					`${message.author}: You have already voted!`
+				);
 			let pollEmbed = new discord.MessageEmbed()
 				.setAuthor(bot.user.username)
 				.setColor('#50B3BC')
@@ -30,6 +34,7 @@ module.exports.run = async (bot, message, args) => {
 					if (/cancel/i.test(m.first().content))
 						return message.channel.send(`${message.author}: Cancelled.`);
 					poll.choices[m.first().content - 1].votes++;
+					poll.voters.push(message.author.id);
 					Poll.findOneAndUpdate({ title: name }, poll, (err, doc) => {
 						message.channel.send(
 							`Successful vote! View current standing with \`.poll view ${doc.title}\``
@@ -55,6 +60,10 @@ module.exports.run = async (bot, message, args) => {
 						return message.channel.send(
 							`${message.author}: No poll found with that name.`
 						);
+					if (poll.voters.includes(message.author.id))
+						return message.channel.send(
+							`${message.author}: You have already voted!`
+						);
 					let pollEmbed = new discord.MessageEmbed()
 						.setAuthor(bot.user.username)
 						.setColor('#50B3BC')
@@ -78,6 +87,7 @@ module.exports.run = async (bot, message, args) => {
 							if (/cancel/i.test(m.first().content))
 								return message.channel.send(`${message.author}: Cancelled.`);
 							poll.choices[m.first().content - 1].votes++;
+							poll.voters.push(message.author.id);
 							Poll.findOneAndUpdate({ title: title }, poll, (err, doc) => {
 								message.channel.send(
 									`Successful vote! View current standing with \`.poll view ${doc.title}\``
@@ -96,5 +106,5 @@ module.exports.help = {
 	aliases: [''],
 	description: 'You can vote on polls with this command',
 	hasAccess: 'Everyone',
-	usage: '.vote <name> <choice>'
+	usage: '.vote ?<name>'
 };

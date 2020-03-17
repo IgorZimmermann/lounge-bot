@@ -4,6 +4,7 @@ let Schema = mongoose.Schema;
 let pollSchema = new Schema({
 	title: String,
 	author: Object,
+	voters: [],
 	createdAt: { type: Date, default: Date.now() },
 	choices: [{ title: String, votes: Number }]
 });
