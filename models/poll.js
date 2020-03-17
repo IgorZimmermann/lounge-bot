@@ -14,7 +14,4 @@ pollSchema.methods.getOrder = () => {
 	});
 };
 
-pollSchema.statics.findByTitle = (title, cb) => {
-	return this.model.find({ title: title }, cb);
-};
 module.exports = mongoose.model('Poll', pollSchema);
