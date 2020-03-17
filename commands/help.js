@@ -32,7 +32,7 @@ module.exports.run = async (bot, message, args) => {
 			bot.commands.get(command) || bot.commands.get(bot.aliases.get(command));
 		if (!cmdFile) {
 			return message.channel.send(
-				'I do not have such command. Use `.help` to see all commands!'
+				`I do not have such command. Use \`${bot.prefix}help\` to see all commands!`
 			);
 		} else {
 			let callwords;
@@ -43,7 +43,11 @@ module.exports.run = async (bot, message, args) => {
 			}
 			helpEmbed.addField(
 				capitalizeFirstLetter(cmdFile.help.name),
-				`\n\n**Callwords: ** ${callwords}\n\n**Description: ** ${cmdFile.help.description}\n\n**Has Access: ** ${cmdFile.help.hasAccess}\n\n**Usage: ** ${cmdFile.help.usage}\n\n`
+				`\n\n**Callwords: ** ${callwords}\n\n**Description: ** ${
+					cmdFile.help.description
+				}\n\n**Has Access: ** ${
+					cmdFile.help.hasAccess
+				}\n\n**Usage: ** ${cmdFile.help.usage.replace('.', bot.prefix)}\n\n`
 			);
 			message.channel.send(helpEmbed);
 		}

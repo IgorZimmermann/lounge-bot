@@ -47,20 +47,20 @@ bot.on('message', async message => {
 	if (message.author.bot) return;
 	if (message.channel.type === 'dm') return;
 
-	let prefix = '.';
+	bot.prefix = process.env.DISCORD_PREFIX;
 	let msgArray = message.content.split(' ');
 	let cmd = msgArray[0];
 	let args = msgArray.splice(1);
 
-	if (cmd.startsWith(prefix)) {
+	if (cmd.startsWith(bot.prefix)) {
 		let cmdfile =
-			bot.commands.get(cmd.slice(prefix.length)) ||
-			bot.commands.get(bot.aliases.get(cmd.slice(prefix.length)));
+			bot.commands.get(cmd.slice(bot.prefix.length)) ||
+			bot.commands.get(bot.aliases.get(cmd.slice(bot.prefix.length)));
 		if (cmdfile) {
 			cmdfile.run(bot, message, args);
 		} else {
 			message.channel.send(
-				'I do not have such command. Use `.help` to see all commands!'
+				`I do not have such command. Use \`${bot.prefix}help\` to see all commands!`
 			);
 		}
 	}
