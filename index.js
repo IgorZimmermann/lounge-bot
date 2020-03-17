@@ -11,7 +11,7 @@ bot.aliases = new discord.Collection();
 const mongoose = require('mongoose');
 
 mongoose.connect(
-	`mongodb+srv://PaperKing01:${process.env.MONGO_PASSWORD}@cluster0-htwth.mongodb.net/test?retryWrites=true&w=majority`,
+	`mongodb+srv://lounge-bot-dev:${process.env.MONGO_PASSWORD}@cluster0-htwth.mongodb.net/test?retryWrites=true&w=majority`,
 	{
 		useNewUrlParser: true,
 		useUnifiedTopology: true
