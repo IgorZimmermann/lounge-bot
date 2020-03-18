@@ -17,19 +17,23 @@ module.exports.run = async (bot, message, args) => {
 		};
 		message.channel
 			.send('What title would you like to give the poll?')
-			.then(() => {
+			.then(msg => {
 				message.channel.awaitMessages(filter, options).then(c => {
 					if (c.first().content == 'cancel')
 						return message.channel.send(`${message.author}: Cancelled`);
+					c.first().delete();
+					msg.delete();
 					pollObj.title = c.first().content;
 					message.channel
 						.send(
 							'What choices would you like to create? (separate with a `,`)'
 						)
-						.then(() => {
+						.then(msg2 => {
 							message.channel.awaitMessages(filter, options).then(m => {
 								if (m.first().content == 'cancel')
 									return message.channel.send(`${message.author}: Cancelled`);
+								m.first().delete();
+								msg2.delete();
 								m.first()
 									.content.split(',')
 									.forEach(p => pollObj.choices.push({ title: p, votes: 0 }));
@@ -67,12 +71,14 @@ module.exports.run = async (bot, message, args) => {
 					new RegExp(`^([1-${polls.length}]|cancel)$`).test(m.content);
 
 				const options = { time: 20000, max: 1, errors: ['time'] };
-				message.channel.send(pollsEmbed).then(() => {
+				message.channel.send(pollsEmbed).then(msg => {
 					message.channel
 						.awaitMessages(filter, options)
 						.then(m => {
 							if (/cancel/i.test(m.first().content))
 								return message.channel.send(`${message.author}: Cancelled`);
+							m.first().delete();
+							msg.delete();
 							Poll.findOne(
 								{ title: titleArray[m.first().content - 1] },
 								(err, poll) => {
