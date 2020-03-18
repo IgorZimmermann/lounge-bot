@@ -2,7 +2,11 @@ const discord = require('discord.js');
 const fs = require('fs');
 
 const config = require('./config/config.json');
-require('dotenv').config();
+try {
+	require('dotenv').config();
+} catch (e) {
+	console.log('Running production process...');
+}
 let bot = new discord.Client();
 
 bot.commands = new discord.Collection();
