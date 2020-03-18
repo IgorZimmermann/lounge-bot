@@ -5,11 +5,19 @@ module.exports.run = async (bot, message, args) => {
 
 	let command = args[0].toLowerCase().replace('.js', '');
 	try {
+		message.delete({ timeout: 5000 });
 		delete require.cache[require.resolve(`./${command}.js`)];
 		bot.commands.delete(command);
 		const pull = require(`./${command}`);
 		bot.commands.set(command, pull);
-	} catch (e) {}
+		message.channel
+			.send(`${message.author}: Reloaded command \`${command}\``)
+			.then(msg => msg.delete({ timeout: 5000 }));
+	} catch (e) {
+		message.channel.send(
+			`${message.author}: Command \`${command}\` cannot be reloaded.`
+		);
+	}
 };
 
 module.exports.help = {
