@@ -1,6 +1,9 @@
 # Secrets ignore
 */secrets.json
 
+# .env ignore
+.env
+
 # Test ignore
 test/
 *.test.js

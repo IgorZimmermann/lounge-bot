@@ -2,7 +2,7 @@ const discord = require('discord.js');
 const fs = require('fs');
 
 const config = require('./config/config.json');
-
+require('dotenv').config();
 let bot = new discord.Client();
 
 bot.commands = new discord.Collection();

@@ -21,6 +21,7 @@
 		"mongoose": "^5.9.4"
 	},
 	"devDependencies": {
-		"inquirer": "^7.0.6"
+		"inquirer": "^7.0.6",
+		"dotenv": "^8.2.0"
 	}
 }
