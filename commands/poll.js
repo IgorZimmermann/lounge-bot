@@ -53,7 +53,9 @@ module.exports.run = async (bot, message, args) => {
 					.setDescription(
 						"Choose the poll you want to view. Reply with it's number!"
 					);
+				let titleArray = [];
 				polls.forEach((p, i) => {
+					titleArray.push(p.title);
 					pollsEmbed.addField(
 						`**${i + 1} > ${p.title}**`,
 						p.choices.map(x => x.title).join(',\n')
@@ -71,22 +73,25 @@ module.exports.run = async (bot, message, args) => {
 						.then(m => {
 							if (/cancel/i.test(m.first().content))
 								return message.channel.send(`${message.author}: Cancelled`);
-							Poll.findOne({ title: m.first().content }, (err, poll) => {
-								if (!poll)
-									return message.channel.send(
-										`${message.author}: No poll found.`
-									);
-								let pollEmbed = new discord.MessageEmbed()
-									.setAuthor(bot.user.username)
-									.setColor('#50B3BC')
-									.setTitle(poll.title);
+							Poll.findOne(
+								{ title: titleArray[m.first().content - 1] },
+								(err, poll) => {
+									if (!poll)
+										return message.channel.send(
+											`${message.author}: No poll found.`
+										);
+									let pollEmbed = new discord.MessageEmbed()
+										.setAuthor(bot.user.username)
+										.setColor('#50B3BC')
+										.setTitle(poll.title);
 
-								poll.choices.forEach(p => {
-									pollEmbed.addField(p.title, p.votes);
-								});
+									poll.choices.forEach(p => {
+										pollEmbed.addField(p.title, p.votes);
+									});
 
-								message.channel.send(pollEmbed);
-							});
+									message.channel.send(pollEmbed);
+								}
+							);
 						})
 						.catch(() =>
 							message.channel.send(`${message.author}: Ran out of time.`)
