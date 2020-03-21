@@ -14,7 +14,7 @@ module.exports.run = async (bot, message, args) => {
 			.then(m => m.delete({ timeout: 2000 }));
 		message.delete({ timeout: 2000 });
 	} else {
-		message.channel.bulkDelete(args[0]);
+		message.channel.bulkDelete(args[0] + 1);
 	}
 };
 
