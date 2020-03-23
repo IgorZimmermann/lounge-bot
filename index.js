@@ -7,6 +7,10 @@ try {
 } catch (e) {
 	console.log('Running production process...');
 }
+
+const remote = require('./remote');
+remote.start();
+
 let bot = new discord.Client();
 
 bot.commands = new discord.Collection();
@@ -37,6 +41,7 @@ fs.readdir('./commands/', (err, files) => {
 });
 
 bot.on('ready', () => {
+	remote.emit('bot-ready');
 	setInterval(() => {
 		let status =
 			config.statuses[Math.floor(Math.random() * config.statuses.length)];
@@ -51,6 +56,8 @@ bot.on('message', async message => {
 	if (message.author.bot) return;
 	if (message.channel.type === 'dm') return;
 
+	remote.emit('bot-message', message);
+
 	bot.prefix = process.env.DISCORD_PREFIX;
 	let msgArray = message.content.split(' ');
 	let cmd = msgArray[0];
@@ -61,6 +68,7 @@ bot.on('message', async message => {
 			bot.commands.get(cmd.slice(bot.prefix.length)) ||
 			bot.commands.get(bot.aliases.get(cmd.slice(bot.prefix.length)));
 		if (cmdfile) {
+			remote.emit('bot-command', cmdfile);
 			cmdfile.run(bot, message, args);
 		} else {
 			message.channel.send(
