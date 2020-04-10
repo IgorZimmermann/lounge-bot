@@ -62,7 +62,7 @@ remote.start = () => {
 		remote.emit('disconnected');
 	});
 
-	server.listen(process.env.WEB_PORT, () => {
+	server.listen(process.env.PORT, () => {
 		console.log(
 			'Remote is listening at https://igors-lounge-bot.herokuapp.com...'
 		);
