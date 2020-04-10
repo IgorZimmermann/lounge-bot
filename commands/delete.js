@@ -11,10 +11,10 @@ module.exports.run = async (bot, message, args) => {
 	if (args[0] > 99) {
 		message.channel
 			.send(`${message.author}: Max amount of deletable messages is \`99\``)
-			.then(m => m.delete({ timeout: 2000 }));
+			.then((m) => m.delete({ timeout: 2000 }));
 		message.delete({ timeout: 2000 });
 	} else {
-		message.channel.bulkDelete(args[0] + 1);
+		message.channel.bulkDelete(Number(args[0]) + 1);
 	}
 };
 
@@ -23,5 +23,5 @@ module.exports.help = {
 	aliases: ['bulkDelete', 'del'],
 	description: 'It deletes the specified amount of messages.',
 	hasAccess: 'Admin',
-	usage: '.delete <amount>'
+	usage: '.delete <amount>',
 };
