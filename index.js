@@ -40,8 +40,9 @@ fs.readdir('./commands/', (err, files) => {
 	});
 });
 
+let status = 'disconnected';
 bot.on('ready', () => {
-	remote.emit('status-change', 'connected');
+	status = 'connected';
 	setInterval(() => {
 		let status =
 			config.statuses[Math.floor(Math.random() * config.statuses.length)];
@@ -50,6 +51,10 @@ bot.on('ready', () => {
 	console.log(`${bot.user.username} is online...`);
 	if (mongoose.connection)
 		console.log(`${bot.user.username} connected to the database...`);
+});
+
+remote.on('get-status', () => {
+	remote.emit('status', status);
 });
 
 remote.on('send-message', async (obj) => {

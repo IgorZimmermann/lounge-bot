@@ -45,7 +45,11 @@ remote.start = () => {
 		});
 
 		socket.on('get-status', () => {
-			socket.emit('status', remote.botStatus);
+			remote.emit('get-status');
+		});
+
+		remote.on('status', (status) => {
+			socket.emit('status', status);
 		});
 
 		remote.on('response', (resp) => {

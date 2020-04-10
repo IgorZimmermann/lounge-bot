@@ -12,10 +12,9 @@ $(() => {
 			.removeClass('disconnected')
 			.removeClass('reconnecting')
 			.addClass('connected');
-
-		socket.emit('get-status');
 	});
 
+	socket.emit('get-status');
 	socket.on('status', (stat) => {
 		$botStatus.removeClass().addClass(`dot ${stat}`);
 	});
@@ -24,7 +23,10 @@ $(() => {
 		let $respElem = $(`<div class="response"><p>${resp}</p></div>`);
 		$content.prepend($respElem);
 		setTimeout(() => {
-			$respElem.hide(300).remove();
+			$respElem.hide(300);
+			setTimeout(() => {
+				$respElem.remove();
+			}, 300);
 		}, 10000);
 	});
 
