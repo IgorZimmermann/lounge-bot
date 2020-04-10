@@ -14,7 +14,7 @@ bot.commands = new discord.Collection();
 bot.aliases = new discord.Collection();
 
 const remote = require('./remote');
-remote.start(bot);
+remote.start();
 
 const mongoose = require('mongoose');
 
