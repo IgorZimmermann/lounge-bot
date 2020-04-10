@@ -1,6 +1,6 @@
 const stream = require('stream');
 let remote = new stream.Writable();
-remote.start = (bot) => {
+remote.start = () => {
 	const express = require('express');
 	const app = express();
 	const hbs = require('hbs');
