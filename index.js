@@ -41,7 +41,7 @@ fs.readdir('./commands/', (err, files) => {
 });
 
 let status = 'disconnected';
-bot.on('ready', () => {
+bot.on('ready', async () => {
 	status = 'connected';
 	setInterval(() => {
 		let status =
@@ -51,6 +51,7 @@ bot.on('ready', () => {
 	console.log(`${bot.user.username} is online...`);
 	if (mongoose.connection)
 		console.log(`${bot.user.username} connected to the database...`);
+	await require('./services/chilledcow')(bot);
 });
 
 remote.on('get-status', () => {
