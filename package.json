@@ -22,8 +22,7 @@
 		"hbs": "^4.1.0",
 		"mongoose": "^5.9.4",
 		"socket.io": "^2.3.0",
-		"stream": "0.0.2",
-		"ytdl-core": "^2.0.1"
+		"stream": "0.0.2"
 	},
 	"devDependencies": {
 		"inquirer": "^7.0.6",
