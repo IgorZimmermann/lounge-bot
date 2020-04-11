@@ -23,7 +23,7 @@
 		"mongoose": "^5.9.4",
 		"socket.io": "^2.3.0",
 		"stream": "0.0.2",
-		"ytdl-core-discord": "^1.1.0"
+		"ytdl-core": "^2.0.1"
 	},
 	"devDependencies": {
 		"inquirer": "^7.0.6",
