@@ -7,10 +7,14 @@ try {
 } catch (e) {
 	console.log('Running production process...');
 }
+
 let bot = new discord.Client();
 
 bot.commands = new discord.Collection();
 bot.aliases = new discord.Collection();
+
+const remote = require('./remote');
+remote.start();
 
 const mongoose = require('mongoose');
 
@@ -18,25 +22,27 @@ mongoose.connect(
 	`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0-htwth.mongodb.net/test?retryWrites=true&w=majority`,
 	{
 		useNewUrlParser: true,
-		useUnifiedTopology: true
+		useUnifiedTopology: true,
 	},
-	err => {
+	(err) => {
 		if (err) return console.error(err);
 	}
 );
 
 fs.readdir('./commands/', (err, files) => {
-	let jsfiles = files.filter(f => f.split('.').pop() === 'js');
+	let jsfiles = files.filter((f) => f.split('.').pop() === 'js');
 	jsfiles.forEach((f, i) => {
 		let props = require(`./commands/${f}`);
 		bot.commands.set(props.help.name, props);
-		props.help.aliases.forEach(alias => {
+		props.help.aliases.forEach((alias) => {
 			bot.aliases.set(alias, props.help.name, props);
 		});
 	});
 });
 
-bot.on('ready', () => {
+let status = 'disconnected';
+bot.on('ready', async () => {
+	status = 'connected';
 	setInterval(() => {
 		let status =
 			config.statuses[Math.floor(Math.random() * config.statuses.length)];
@@ -45,9 +51,21 @@ bot.on('ready', () => {
 	console.log(`${bot.user.username} is online...`);
 	if (mongoose.connection)
 		console.log(`${bot.user.username} connected to the database...`);
+	await require('./services/chilledcow')(bot);
 });
 
-bot.on('message', async message => {
+remote.on('get-status', () => {
+	remote.emit('status', status);
+});
+
+remote.on('send-message', async (obj) => {
+	let channel = await bot.channels.fetch(obj.id);
+	channel.send(obj.message).then((m) => {
+		remote.emit('response', `Successfully sent a message with iD: ${m.id}`);
+	});
+});
+
+bot.on('message', async (message) => {
 	if (message.author.bot) return;
 	if (message.channel.type === 'dm') return;
 
@@ -61,6 +79,7 @@ bot.on('message', async message => {
 			bot.commands.get(cmd.slice(bot.prefix.length)) ||
 			bot.commands.get(bot.aliases.get(cmd.slice(bot.prefix.length)));
 		if (cmdfile) {
+			remote.emit('bot-command', cmdfile);
 			cmdfile.run(bot, message, args);
 		} else {
 			message.channel.send(

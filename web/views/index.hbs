@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {{> head}}
+</head>
+
+<body>
+  {{> nav}}
+  <div class="content">
+    <div class="content-wrapper">
+      <section id="send-message" class="send-message">
+        <h3 class="section-title">Send a Message</h3>
+        <input type="text" name="channel-id" id="channel-id" class="message-input" placeholder="Channel iD">
+        <select name="type" id="type" class="message-input">
+          <option value="text" selected>Text</option>
+          <option value="embed">Embed</option>
+        </select>
+        <input type="text" name="message" id="message" class="message-input" placeholder="Message">
+        <input type="submit" id="submit-message" class="message-button" value="Send">
+      </section>
+    </div>
+  </div>
+  {{> scripts}}
+</body>
+
+</html>
