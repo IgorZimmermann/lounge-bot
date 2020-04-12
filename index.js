@@ -8,6 +8,13 @@ try {
 	console.log('Running production process...');
 }
 
+const ping = require('ping');
+setInterval(() => {
+	ping.sys.probe('https://igors-lounge-bot.herokuapp.com/', (b) => {
+		console.log('Pinged web remote: ' + b);
+	});
+}, 7200000);
+
 let bot = new discord.Client();
 
 bot.commands = new discord.Collection();

@@ -21,6 +21,7 @@
 		"express": "^4.17.1",
 		"hbs": "^4.1.0",
 		"mongoose": "^5.9.4",
+		"ping": "^0.2.3",
 		"socket.io": "^2.3.0",
 		"stream": "0.0.2",
 		"ytdl-core-discord": "^1.1.0"
