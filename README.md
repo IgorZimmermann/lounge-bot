@@ -1,4 +1,4 @@
-![alt text](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftheultralinx.com%2F.image%2Ft_share%2FMTI5ODI1NzA5NDc1NTA2ODE5%2Fvintage-3d-gif-2gif.gif&f=1&nofb=1)
+![alt text](https://www.ausretrogamer.com/wp-content/uploads/2016/07/minitel_600.gif)
 
 <p>
   <h1 align="center">Lounge Bot</h1>
