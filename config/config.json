@@ -8,5 +8,9 @@
 			"name": "Lo-Fi Chilled Cow",
 			"type": "LISTENING"
 		}
-	]
+	],
+	"chilledcow": {
+		"isEnabled": true,
+		"voiceId": "804721874780684340"
+	}
 }
