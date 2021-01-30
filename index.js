@@ -45,7 +45,6 @@ bot.on('ready', async () => {
 		bot.user.setActivity(status)
 	}, 3000)
 	console.log(`${bot.user.username} is online...`)
-	await require('./services/chilledcow')(bot)
 })
 
 remote.on('get-status', () => {
