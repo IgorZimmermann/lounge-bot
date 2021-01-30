@@ -1,7 +1,7 @@
 module.exports.run = async (bot, message, args) => {
 	let author = message.author;
-	let content = message.content.replace('.repeat', ' ');
-	message.channel.send(`${author}:${content}`);
+	let content = args.join(' ');
+	message.channel.send(`${author}: ${content}`);
 	message.delete();
 };
 
