@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&display=swap');
+
 * {
 	color: black;
 	margin: 0;
@@ -6,7 +8,7 @@
 
 body {
 	margin: 0;
-	font-family: 'Baloo Paaji 2', Arial, sans-serif;
+	font-family: 'Oswald', Arial, sans-serif;
 	background: white;
 }
 
@@ -139,6 +141,7 @@ small {
 .section-title {
 	font-size: 40px;
 	font-weight: 400;
+	margin-bottom: 10px;
 }
 
 .message-input {
@@ -171,4 +174,5 @@ small {
 .message-button:hover {
 	color: white;
 	background-color: black;
+	cursor: pointer;
 }

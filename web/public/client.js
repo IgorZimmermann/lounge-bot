@@ -39,11 +39,9 @@ $(() => {
 
 	document.querySelector('#submit-message').onclick = () => {
 		let inps = document.querySelectorAll('.message-input');
-		if (inps[1].value == 'text') {
-			socket.emit('send-message', {
-				id: inps[0].value,
-				message: inps[2].value,
-			});
-		}
+		socket.emit('send-message', {
+			id: inps[0].value,
+			message: inps[1].value,
+		});
 	};
 });
