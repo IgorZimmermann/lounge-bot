@@ -1,7 +1,7 @@
 module.exports.run = async (bot, message, args) => {
-	let author = message.author;
-	message.channel.send(`Hello, ${author}!`);
-};
+	let author = message.author
+	message.channel.send(`Hello, ${author}!`)
+}
 
 module.exports.help = {
 	name: 'hello',
@@ -9,4 +9,4 @@ module.exports.help = {
 	description: 'The bot says hello to you.',
 	hasAccess: 'Everyone',
 	usage: '.hello'
-};
+}

@@ -1,7 +1,7 @@
-const inquirer = require('inquirer');
-const { readdirSync, writeFile } = require('fs');
+const inquirer = require('inquirer')
+const { readdirSync, writeFile } = require('fs')
 
-let commands = readdirSync('./commands/').filter(f => f.endsWith('.js'));
+let commands = readdirSync('./commands/').filter(f => f.endsWith('.js'))
 
 let questions = [
 	{
@@ -9,8 +9,8 @@ let questions = [
 		name: 'name',
 		message: 'The name of the command: ',
 		validate: v => {
-			let available = !commands.includes(v);
-			return available || console.log('Command already exists!');
+			let available = !commands.includes(v)
+			return available || console.log('Command already exists!')
 		}
 	},
 	{
@@ -18,7 +18,7 @@ let questions = [
 		name: 'aliases',
 		message: 'The aliases (separated by ,): ',
 		filter: v => {
-			return v.split(',');
+			return v.split(',')
 		}
 	},
 	{
@@ -37,13 +37,13 @@ let questions = [
 		name: 'usage',
 		message: 'Usage of the command: '
 	}
-];
+]
 
 inquirer.prompt(questions).then(a => {
 	let cmdFile = `module.exports.run = async (bot, message, args) => {}\n\nmodule.exports.help = ${JSON.stringify(
 		a
-	)}`;
+	)}`
 	writeFile(`./commands/${a.name}.js`, cmdFile, () =>
 		console.log(`Created ${a.name} command!`)
-	);
-});
+	)
+})

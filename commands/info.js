@@ -1,4 +1,4 @@
-const discord = require('discord.js');
+const discord = require('discord.js')
 
 module.exports.run = async (bot, message, args) => {
 	let infoEmbed = new discord.MessageEmbed()
@@ -10,9 +10,9 @@ module.exports.run = async (bot, message, args) => {
 		.addField('Server Created At', `${message.guild.createdAt}`)
 		.addField('Server Owner', `${message.guild.owner}`)
 		.addField('Members', `${message.guild.memberCount}`)
-		.addField('Region', `${message.guild.region}`);
-	message.channel.send(infoEmbed);
-};
+		.addField('Region', `${message.guild.region}`)
+	message.channel.send(infoEmbed)
+}
 
 module.exports.help = {
 	name: 'info',
@@ -20,4 +20,4 @@ module.exports.help = {
 	description: 'Info about the server',
 	hasAccess: 'Everyone',
 	usage: '.info'
-};
+}
